@@ -911,6 +911,25 @@ func (v *MockWalker) ExpectWalkOnce(i interface{}) {
 	v.EXPECT().BeginWalk(gomock.Eq(i)).Times(1).Return(nil)
 }
 
+type stubWalker struct {
+	DefaultWalker
+}
+
+func (*stubWalker) WalkCommentGroup(c *ast.CommentGroup) bool {
+	return false
+}
+
+func (*stubWalker) WalkComment(c *ast.Comment) bool {
+	panic("WalkCommentGroup's false return should prevent this")
+}
+
+func TestWalkMethodReturnFalseShouldStopWalkChild(t *testing.T) {
+	comment := &ast.Comment{}
+	commentGroup := &ast.CommentGroup{List: []*ast.Comment{comment}}
+	sut := &stubWalker{}
+	Visit(sut, commentGroup)
+}
+
 func testVisit(t *testing.T, sut ast.Node, setup func(*MockWalker)) {
 	ctrl, walker := createMock(t, sut)
 	defer ctrl.Finish()
@@ -922,7 +941,7 @@ func testVisit(t *testing.T, sut ast.Node, setup func(*MockWalker)) {
 func setupWalkAndEndWalk(sut ast.Node, ctrl *gomock.Controller, walker *MockWalker) {
 	walkMethodName := getWalkNodeMethodName(sut)
 	endWalkMethodName := getEndWalkNodeMethodName(sut)
-	ctrl.RecordCall(walker.recorder.mock, walkMethodName, sut)
+	ctrl.RecordCall(walker.recorder.mock, walkMethodName, sut).Return(true)
 	ctrl.RecordCall(walker.recorder.mock, endWalkMethodName, sut)
 }
 

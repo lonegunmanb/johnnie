@@ -17,115 +17,115 @@ import (
 type Walker interface {
 	BeginWalk(node ast.Node) (w Walker)
 	EndWalk(node ast.Node)
-	WalkComment(comment *ast.Comment)
-	WalkCommentGroup(group *ast.CommentGroup)
+	WalkComment(comment *ast.Comment) bool
+	WalkCommentGroup(group *ast.CommentGroup) bool
 	EndWalkComment(comment *ast.Comment)
 	EndWalkCommentGroup(group *ast.CommentGroup)
-	WalkField(field *ast.Field)
+	WalkField(field *ast.Field) bool
 	EndWalkField(field *ast.Field)
-	WalkFieldList(list *ast.FieldList)
+	WalkFieldList(list *ast.FieldList) bool
 	EndWalkFieldList(list *ast.FieldList)
-	WalkEllipsis(ellipsis *ast.Ellipsis)
+	WalkEllipsis(ellipsis *ast.Ellipsis) bool
 	EndWalkEllipsis(ellipsis *ast.Ellipsis)
-	WalkFuncLit(lit *ast.FuncLit)
+	WalkFuncLit(lit *ast.FuncLit) bool
 	EndWalkFuncLit(lit *ast.FuncLit)
-	WalkCompositeLit(lit *ast.CompositeLit)
+	WalkCompositeLit(lit *ast.CompositeLit) bool
 	EndWalkCompositeLit(lit *ast.CompositeLit)
-	WalkParenExpr(expr *ast.ParenExpr)
+	WalkParenExpr(expr *ast.ParenExpr) bool
 	EndWalkParenExpr(expr *ast.ParenExpr)
-	WalkSelectorExpr(expr *ast.SelectorExpr)
+	WalkSelectorExpr(expr *ast.SelectorExpr) bool
 	EndWalkSelectorExpr(expr *ast.SelectorExpr)
-	WalkIndexExpr(expr *ast.IndexExpr)
+	WalkIndexExpr(expr *ast.IndexExpr) bool
 	EndWalkIndexExpr(expr *ast.IndexExpr)
-	WalkSliceExpr(expr *ast.SliceExpr)
+	WalkSliceExpr(expr *ast.SliceExpr) bool
 	EndWalkSliceExpr(expr *ast.SliceExpr)
-	WalkTypeAssertExpr(expr *ast.TypeAssertExpr)
+	WalkTypeAssertExpr(expr *ast.TypeAssertExpr) bool
 	EndWalkTypeAssertExpr(expr *ast.TypeAssertExpr)
-	WalkCallExpr(expr *ast.CallExpr)
+	WalkCallExpr(expr *ast.CallExpr) bool
 	EndWalkCallExpr(expr *ast.CallExpr)
-	WalkStarExpr(expr *ast.StarExpr)
+	WalkStarExpr(expr *ast.StarExpr) bool
 	EndWalkStarExpr(expr *ast.StarExpr)
-	WalkUnaryExpr(expr *ast.UnaryExpr)
+	WalkUnaryExpr(expr *ast.UnaryExpr) bool
 	EndWalkUnaryExpr(expr *ast.UnaryExpr)
-	WalkBinaryExpr(expr *ast.BinaryExpr)
+	WalkBinaryExpr(expr *ast.BinaryExpr) bool
 	EndWalkBinaryExpr(expr *ast.BinaryExpr)
-	WalkKeyValueExpr(expr *ast.KeyValueExpr)
+	WalkKeyValueExpr(expr *ast.KeyValueExpr) bool
 	EndWalkKeyValueExpr(expr *ast.KeyValueExpr)
-	WalkArrayType(arrayType *ast.ArrayType)
+	WalkArrayType(arrayType *ast.ArrayType) bool
 	EndWalkArrayType(arrayType *ast.ArrayType)
-	WalkStructType(structType *ast.StructType)
+	WalkStructType(structType *ast.StructType) bool
 	EndWalkStructType(structType *ast.StructType)
-	WalkFuncType(funcType *ast.FuncType)
+	WalkFuncType(funcType *ast.FuncType) bool
 	EndWalkFuncType(funcType *ast.FuncType)
-	WalkInterfaceType(interfaceType *ast.InterfaceType)
+	WalkInterfaceType(interfaceType *ast.InterfaceType) bool
 	EndWalkInterfaceType(interfaceType *ast.InterfaceType)
-	WalkMapType(mapType *ast.MapType)
+	WalkMapType(mapType *ast.MapType) bool
 	EndWalkMapType(mapType *ast.MapType)
-	WalkChanType(chanType *ast.ChanType)
+	WalkChanType(chanType *ast.ChanType) bool
 	EndWalkChanType(chanType *ast.ChanType)
-	WalkDeclStmt(stmt *ast.DeclStmt)
+	WalkDeclStmt(stmt *ast.DeclStmt) bool
 	EndWalkDeclStmt(stmt *ast.DeclStmt)
-	WalkLabeledStmt(stmt *ast.LabeledStmt)
+	WalkLabeledStmt(stmt *ast.LabeledStmt) bool
 	EndWalkLabeledStmt(stmt *ast.LabeledStmt)
-	WalkExprStmt(stmt *ast.ExprStmt)
+	WalkExprStmt(stmt *ast.ExprStmt) bool
 	EndWalkExprStmt(stmt *ast.ExprStmt)
-	WalkSendStmt(stmt *ast.SendStmt)
+	WalkSendStmt(stmt *ast.SendStmt) bool
 	EndWalkSendStmt(stmt *ast.SendStmt)
-	WalkIncDecStmt(stmt *ast.IncDecStmt)
+	WalkIncDecStmt(stmt *ast.IncDecStmt) bool
 	EndWalkIncDecStmt(stmt *ast.IncDecStmt)
-	WalkAssignStmt(stmt *ast.AssignStmt)
+	WalkAssignStmt(stmt *ast.AssignStmt) bool
 	EndWalkAssignStmt(stmt *ast.AssignStmt)
-	WalkGoStmt(stmt *ast.GoStmt)
+	WalkGoStmt(stmt *ast.GoStmt) bool
 	EndWalkGoStmt(stmt *ast.GoStmt)
-	WalkDeferStmt(stmt *ast.DeferStmt)
+	WalkDeferStmt(stmt *ast.DeferStmt) bool
 	EndWalkDeferStmt(stmt *ast.DeferStmt)
-	WalkReturnStmt(stmt *ast.ReturnStmt)
+	WalkReturnStmt(stmt *ast.ReturnStmt) bool
 	EndWalkReturnStmt(stmt *ast.ReturnStmt)
-	WalkBranchStmt(stmt *ast.BranchStmt)
+	WalkBranchStmt(stmt *ast.BranchStmt) bool
 	EndWalkBranchStmt(stmt *ast.BranchStmt)
-	WalkBlockStmt(stmt *ast.BlockStmt)
+	WalkBlockStmt(stmt *ast.BlockStmt) bool
 	EndWalkBlockStmt(stmt *ast.BlockStmt)
-	WalkIfStmt(stmt *ast.IfStmt)
+	WalkIfStmt(stmt *ast.IfStmt) bool
 	EndWalkIfStmt(stmt *ast.IfStmt)
-	WalkCaseClause(clause *ast.CaseClause)
+	WalkCaseClause(clause *ast.CaseClause) bool
 	EndWalkCaseClause(clause *ast.CaseClause)
-	WalkSwitchStmt(stmt *ast.SwitchStmt)
+	WalkSwitchStmt(stmt *ast.SwitchStmt) bool
 	EndWalkSwitchStmt(stmt *ast.SwitchStmt)
-	WalkTypeSwitchStmt(stmt *ast.TypeSwitchStmt)
+	WalkTypeSwitchStmt(stmt *ast.TypeSwitchStmt) bool
 	EndWalkTypeSwitchStmt(stmt *ast.TypeSwitchStmt)
-	WalkCommClause(clause *ast.CommClause)
+	WalkCommClause(clause *ast.CommClause) bool
 	EndWalkCommClause(clause *ast.CommClause)
-	WalkSelectStmt(stmt *ast.SelectStmt)
+	WalkSelectStmt(stmt *ast.SelectStmt) bool
 	EndWalkSelectStmt(stmt *ast.SelectStmt)
-	WalkForStmt(stmt *ast.ForStmt)
+	WalkForStmt(stmt *ast.ForStmt) bool
 	EndWalkForStmt(stmt *ast.ForStmt)
-	WalkRangeStmt(stmt *ast.RangeStmt)
+	WalkRangeStmt(stmt *ast.RangeStmt) bool
 	EndWalkRangeStmt(stmt *ast.RangeStmt)
-	WalkImportSpec(spec *ast.ImportSpec)
+	WalkImportSpec(spec *ast.ImportSpec) bool
 	EndWalkImportSpec(spec *ast.ImportSpec)
-	WalkValueSpec(spec *ast.ValueSpec)
+	WalkValueSpec(spec *ast.ValueSpec) bool
 	EndWalkValueSpec(spec *ast.ValueSpec)
-	WalkTypeSpec(spec *ast.TypeSpec)
+	WalkTypeSpec(spec *ast.TypeSpec) bool
 	EndWalkTypeSpec(spec *ast.TypeSpec)
-	WalkGenDecl(decl *ast.GenDecl)
+	WalkGenDecl(decl *ast.GenDecl) bool
 	EndWalkGenDecl(decl *ast.GenDecl)
-	WalkFuncDecl(decl *ast.FuncDecl)
+	WalkFuncDecl(decl *ast.FuncDecl) bool
 	EndWalkFuncDecl(decl *ast.FuncDecl)
-	WalkFile(file *ast.File)
+	WalkFile(file *ast.File) bool
 	EndWalkFile(file *ast.File)
-	WalkPackage(n *ast.Package)
+	WalkPackage(n *ast.Package) bool
 	EndWalkPackage(n *ast.Package)
-	WalkBadExpr(n *ast.BadExpr)
+	WalkBadExpr(n *ast.BadExpr) bool
 	EndWalkBadExpr(n *ast.BadExpr)
-	WalkIdent(n *ast.Ident)
+	WalkIdent(n *ast.Ident) bool
 	EndWalkIdent(n *ast.Ident)
-	WalkBasicLit(n *ast.BasicLit)
+	WalkBasicLit(n *ast.BasicLit) bool
 	EndWalkBasicLit(n *ast.BasicLit)
-	WalkBadStmt(n *ast.BadStmt)
+	WalkBadStmt(n *ast.BadStmt) bool
 	EndWalkBadStmt(n *ast.BadStmt)
-	WalkEmptyStmt(n *ast.EmptyStmt)
+	WalkEmptyStmt(n *ast.EmptyStmt) bool
 	EndWalkEmptyStmt(n *ast.EmptyStmt)
-	WalkBadDecl(n *ast.BadDecl)
+	WalkBadDecl(n *ast.BadDecl) bool
 	EndWalkBadDecl(n *ast.BadDecl)
 }
 
@@ -168,7 +168,9 @@ func Visit(v Walker, node ast.Node) {
 	if v.BeginWalk(node) == nil {
 		return
 	}
-	walkNode(v, node)
+	if !walkNode(v, node) {
+		return
+	}
 
 	// walk children
 	// (the order of the cases matches the order
@@ -486,8 +488,9 @@ func Visit(v Walker, node ast.Node) {
 	v.BeginWalk(nil)
 }
 
-func walkNode(v Walker, node ast.Node) {
-	callMethod(node, v, getWalkNodeMethodName(node))
+func walkNode(v Walker, node ast.Node) bool {
+	rets := callMethod(node, v, getWalkNodeMethodName(node))
+	return rets[0].Bool()
 }
 
 func endWalkNode(v Walker, node ast.Node) {
@@ -504,9 +507,9 @@ func getEndWalkNodeMethodName(node ast.Node) string {
 	return fmt.Sprintf("EndWalk%s", nodeName)
 }
 
-func callMethod(node ast.Node, v Walker, walkMethodName string) {
+func callMethod(node ast.Node, v Walker, walkMethodName string) []reflect.Value {
 	walkMethod := getMethod(v, walkMethodName)
-	walkMethod.Call([]reflect.Value{reflect.ValueOf(node)})
+	return walkMethod.Call([]reflect.Value{reflect.ValueOf(node)})
 }
 
 func getMethod(v Walker, walkMethodName string) reflect.Value {
